@@ -1,0 +1,200 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix owl2: <http://www.w3.org/2006/12/owl2#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@base <http://example.com/ns#>.
+
+<#EntityAnnotationsMapping> a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source "csv/entities.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+
+    rr:subjectMap [
+        rml:reference "IRI";
+        rr:class owl:Class
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "Label";
+            ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate obo:IAO_0000115 ;
+        rr:objectMap [
+            rml:reference "Definition";
+            ]
+    ].
+
+<#EntitySubclassMapping> a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source "csv/entities.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+
+    rr:subjectMap [
+        rml:reference "IRI";
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:subClassOf;
+        rr:objectMap [
+            rr:parentTriplesMap <#EntityAnnotationsMapping>;
+            rr:joinCondition [
+                rr:child "rdfs:subClassOf";
+                rr:parent "Label";
+            ];
+        ];
+    ].
+
+<#InstanceAnnotationsMapping> a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source "csv/instances.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+
+    rr:subjectMap [
+        rml:reference "IRI";
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "Label";
+            ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate obo:IAO_0000115 ;
+        rr:objectMap [
+            rml:reference "Definition";
+            ]
+    ].
+
+<#InstanceTypeMapping> a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source "csv/instances.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+
+    rr:subjectMap [
+        rml:reference "IRI";
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdf:type;
+        rr:objectMap [
+            rr:parentTriplesMap <#EntityAnnotationsMapping>;
+            rr:joinCondition [
+                rr:child "rdf:type";
+                rr:parent "Label";
+            ];
+        ];
+    ].
+
+<#RelationAnnotationsMapping> a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source "csv/relations.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+
+    rr:subjectMap [
+        rml:reference "IRI";
+        rr:class rdf:Property
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "Label";
+            ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate obo:IAO_0000115 ;
+        rr:objectMap [
+            rml:reference "Definition";
+            ]
+    ].
+
+<#RelationDomainRangeMapping> a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source "csv/relations.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+
+    rr:subjectMap [
+        rml:reference "IRI";
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:domain;
+        rr:objectMap [
+            rr:parentTriplesMap <#EntityAnnotationsMapping>;
+            rr:joinCondition [
+                rr:child "rdfs:domain";
+                rr:parent "Label";
+            ];
+        ];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:range;
+        rr:objectMap [
+            rr:parentTriplesMap <#EntityAnnotationsMapping>;
+            rr:joinCondition [
+                rr:child "rdfs:range";
+                rr:parent "Label";
+            ];
+        ];
+    ].
+
+<#RelationsSubPropertyMapping> a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source "csv/relations.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+
+    rr:subjectMap [
+        rml:reference "IRI";
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:subPropertyOf;
+        rr:objectMap [
+            rr:parentTriplesMap <#RelationAnnotationsMapping>;
+            rr:joinCondition [
+                rr:child "rdfs:subPropertyOf";
+                rr:parent "Label";
+            ];
+        ];
+    ].
+
+<#RelationsInverseOfMapping> a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source "csv/relations.csv" ;
+        rml:referenceFormulation ql:CSV
+    ];
+
+    rr:subjectMap [
+        rml:reference "IRI";
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate owl:inverseOf;
+        rr:objectMap [
+            rr:parentTriplesMap <#RelationAnnotationsMapping>;
+            rr:joinCondition [
+                rr:child "owl:inverseOf";
+                rr:parent "Label";
+            ];
+        ];
+    ].

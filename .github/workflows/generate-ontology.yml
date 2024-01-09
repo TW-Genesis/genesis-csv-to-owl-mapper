@@ -1,0 +1,32 @@
+name: csv to owl auto-generation pipeline
+run-name: Dev pipeline triggered by ${{ github.actor }}
+
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  csv-to-owl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: map csv to owl
+        working-directory: ./csv_to_owl
+        run: bash "./generate-ontology.sh"
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ./csv_to_owl/genesis.owl
+          fail_on_unmatched_files: true
+
+

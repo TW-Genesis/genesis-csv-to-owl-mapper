@@ -1,0 +1,7 @@
+Label,IRI,Ontobee graph,rdf:type,Definition,Comment
+gram per litre,http://purl.obolibrary.org/obo/UO_0000175,http://purl.obolibrary.org/obo/merged/OBI,concentration unit,,
+degree Celsius,http://purl.obolibrary.org/obo/UO_0000027,http://purl.obolibrary.org/obo/merged/OBI,temperature unit,,
+pH,http://purl.obolibrary.org/obo/UO_0000196,http://purl.obolibrary.org/obo/merged/OBI,concentration unit,,
+Milliliter per Hour,http://purl.obolibrary.org/obo/NCIT_C66962,http://purl.obolibrary.org/obo/merged/NCIT,volumetric flow rate unit,,
+hour,http://purl.obolibrary.org/obo/UO_0000032,http://purl.obolibrary.org/obo/merged/OBI,time unit,,
+milliliter,http://purl.obolibrary.org/obo/UO_0000098,http://purl.obolibrary.org/obo/merged/OBI,volume unit,,
